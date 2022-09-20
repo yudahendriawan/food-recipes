@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2075" />
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_heart.xml" value="0.2075" />
         <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_leaf.xml" value="0.2075" />
         <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_menu_book.xml" value="0.1" />
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_restauran.xml" value="0.2075" />
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/drawable/ic_sad.xml" value="0.2075" />
+        <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/font/courgette.xml" value="0.20277777777777778" />
         <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.25416666666666665" />
         <entry key="..\:/ITS/AndroidProjects/FoodRecipes/app/src/main/res/layout/fragment_food_joke.xml" value="0.25416666666666665" />

@@ -1,4 +1,4 @@
-package com.yudahendriawan.foodrecipes
+package com.yudahendriawan.foodrecipes.ui.fragments.recipes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,7 +19,7 @@ class RecipesFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
-        binding.recyclerView.showShimmer()
+        ///binding.recyclerView.showShimmer()
 
         return binding.root
     }
