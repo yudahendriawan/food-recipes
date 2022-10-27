@@ -1,4 +1,4 @@
-package com.yudahendriawan.foodrecipes
+package com.yudahendriawan.foodrecipes.data.network
 
 import com.yudahendriawan.foodrecipes.models.FoodRecipe
 import retrofit2.Response

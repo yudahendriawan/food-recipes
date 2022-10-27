@@ -1,4 +1,4 @@
-package com.yudahendriawan.foodrecipes
+package com.yudahendriawan.foodrecipes.util
 
 class Constants {
     companion object {
