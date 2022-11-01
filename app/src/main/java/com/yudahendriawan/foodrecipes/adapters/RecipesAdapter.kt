@@ -1,6 +1,5 @@
 package com.yudahendriawan.foodrecipes.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +11,7 @@ import com.yudahendriawan.foodrecipes.util.RecipesDiffUtil
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
-    private var recipe = emptyList<Result>()
+    private var recipes = emptyList<Result>()
 
     class MyViewHolder(private val binding: RecipesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -38,16 +37,16 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentResult = recipe[position]
-        holder.bind(currentResult)
+        val currentRecipes = recipes[position]
+        holder.bind(currentRecipes)
     }
 
-    override fun getItemCount(): Int = recipe.size
+    override fun getItemCount(): Int = recipes.size
 
     fun setData(newData: FoodRecipe) {
-        val recipesDiffUtil = RecipesDiffUtil(recipe, newData.results)
+        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        recipe = newData.results
+        recipes = newData.results
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }
