@@ -28,12 +28,8 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
     private var dietTypeChip = DEFAULT_DIET_TYPE
     private var dietTypeChipId = 0
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
     }
 
