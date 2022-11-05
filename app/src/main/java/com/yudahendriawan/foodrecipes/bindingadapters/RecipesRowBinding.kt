@@ -1,12 +1,17 @@
 package com.yudahendriawan.foodrecipes.bindingadapters
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.yudahendriawan.foodrecipes.R
+import com.yudahendriawan.foodrecipes.models.Result
+import com.yudahendriawan.foodrecipes.ui.fragments.recipes.RecipesFragmentDirections
 
 object RecipesRowBinding {
 
@@ -53,6 +58,19 @@ object RecipesRowBinding {
                         )
                     )
                 }
+            }
+        }
+    }
+
+    @BindingAdapter("onRecipeClickListener")
+    @JvmStatic
+    fun onRecipesClickListener(recipesRowLayout: ConstraintLayout, result: Result) {
+        recipesRowLayout.setOnClickListener {
+            try {
+                val action = RecipesFragmentDirections.actionRecipesFragmentToDetailActivity(result)
+                recipesRowLayout.findNavController().navigate(action)
+            } catch (e: Exception) {
+                Log.d("onRecipesClickListener", e.toString())
             }
         }
     }
