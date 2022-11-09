@@ -25,7 +25,11 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
                     crossfade(600)
                     error(R.drawable.ic_error_placeholder)
                 }
-                ingredientsName.text = extendedIngredient.name?.capitalize()
+                ingredientsName.text = extendedIngredient.name?.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
                 ingredientsAmount.text = extendedIngredient.amount.toString()
                 ingredientsUnit.text = extendedIngredient.unit
                 ingredientsConsistency.text = extendedIngredient.consistency
