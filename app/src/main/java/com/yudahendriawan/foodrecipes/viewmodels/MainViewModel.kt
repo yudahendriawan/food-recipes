@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.yudahendriawan.foodrecipes.data.Repository
-import com.yudahendriawan.foodrecipes.data.database.RecipesEntity
+import com.yudahendriawan.foodrecipes.data.database.entities.RecipesEntity
 import com.yudahendriawan.foodrecipes.models.FoodRecipe
 import com.yudahendriawan.foodrecipes.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel

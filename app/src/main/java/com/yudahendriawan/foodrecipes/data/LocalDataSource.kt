@@ -1,7 +1,7 @@
 package com.yudahendriawan.foodrecipes.data
 
 import com.yudahendriawan.foodrecipes.data.database.RecipesDao
-import com.yudahendriawan.foodrecipes.data.database.RecipesEntity
+import com.yudahendriawan.foodrecipes.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
