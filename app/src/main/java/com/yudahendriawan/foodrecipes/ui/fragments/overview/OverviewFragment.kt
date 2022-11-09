@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import coil.load
+import com.yudahendriawan.foodrecipes.R
 import com.yudahendriawan.foodrecipes.databinding.FragmentOverviewBinding
+import com.yudahendriawan.foodrecipes.models.Result
+import com.yudahendriawan.foodrecipes.util.Constants.Companion.RECIPES_RESULT_KEY
 
 class OverviewFragment : Fragment() {
 
@@ -16,9 +21,118 @@ class OverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentOverviewBinding.inflate(inflater, container, false)
+
+        val args = arguments
+        val myBundle: Result? = args?.getParcelable(RECIPES_RESULT_KEY)
+
+        setupLayout(myBundle)
+
         return binding.root
+    }
+
+    private fun setupLayout(myBundle: Result?) {
+        binding.apply {
+            myBundle?.apply {
+                mainImageView.load(image)
+                titleTextView.text = title
+                likesTextView.text = aggregateLikes.toString()
+                timeTextView.text = readyInMinutes.toString()
+                summaryTextView.text = summary
+
+                if (vegetarian) {
+                    vegeratianImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    vegetarianTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+                if (vegan) {
+                    veganImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    veganTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+                if (glutenFree) {
+                    glutenFreeImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    glutenFreeTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+                if (dairyFree) {
+                    dairyFreeImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    dairyFreeTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+                if (veryHealthy) {
+                    healthyImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    healthyTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+                if (cheap) {
+                    cheapImageView.setColorFilter(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                    cheapTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    )
+                }
+
+            }
+        }
     }
 
     override fun onDestroy() {
