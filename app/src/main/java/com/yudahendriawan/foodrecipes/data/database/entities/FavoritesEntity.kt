@@ -10,6 +10,4 @@ class FavoritesEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var result: Result
-) {
-
-}
+)
