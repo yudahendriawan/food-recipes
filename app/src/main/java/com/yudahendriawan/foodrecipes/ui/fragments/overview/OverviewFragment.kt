@@ -11,6 +11,7 @@ import com.yudahendriawan.foodrecipes.R
 import com.yudahendriawan.foodrecipes.databinding.FragmentOverviewBinding
 import com.yudahendriawan.foodrecipes.models.Result
 import com.yudahendriawan.foodrecipes.util.Constants.Companion.RECIPES_RESULT_KEY
+import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class OverviewFragment : Fragment() {
                 titleTextView.text = title
                 likesTextView.text = aggregateLikes.toString()
                 timeTextView.text = readyInMinutes.toString()
-                summaryTextView.text = summary
+                summaryTextView.text = Jsoup.parse(summary).text()
 
                 if (vegetarian) {
                     vegeratianImageView.setColorFilter(

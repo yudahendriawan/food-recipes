@@ -12,6 +12,7 @@ import coil.load
 import com.yudahendriawan.foodrecipes.R
 import com.yudahendriawan.foodrecipes.models.Result
 import com.yudahendriawan.foodrecipes.ui.fragments.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 
 object RecipesRowBinding {
 
@@ -72,6 +73,14 @@ object RecipesRowBinding {
             } catch (e: Exception) {
                 Log.d("onRecipesClickListener", e.toString())
             }
+        }
+    }
+
+    @BindingAdapter("parseHtml")
+    @JvmStatic
+    fun parseHtml(text: TextView, desc: String?) {
+        if (desc != null) {
+            text.text = Jsoup.parse(desc).text()
         }
     }
 
