@@ -34,6 +34,8 @@ class DetailActivity : AppCompatActivity() {
         fragments.add(IngredientFragment())
         fragments.add(InstructionFragment())
 
+        //try commit
+
         val titles = ArrayList<String>()
         titles.add("Overview")
         titles.add("Ingredients")
