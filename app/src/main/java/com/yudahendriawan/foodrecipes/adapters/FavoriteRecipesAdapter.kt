@@ -2,17 +2,19 @@ package com.yudahendriawan.foodrecipes.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.yudahendriawan.foodrecipes.data.database.entities.FavoritesEntity
 import com.yudahendriawan.foodrecipes.databinding.FavoriteRecipesRowLayoutBinding
+import com.yudahendriawan.foodrecipes.ui.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.yudahendriawan.foodrecipes.util.RecipesDiffUtil
 
 class FavoriteRecipesAdapter : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>() {
 
     private var favoriteRecipes = emptyList<FavoritesEntity>()
 
-    class MyViewHolder(private val binding: FavoriteRecipesRowLayoutBinding) :
+    class MyViewHolder(val binding: FavoriteRecipesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(favoritesEntity: FavoritesEntity) {
@@ -38,6 +40,18 @@ class FavoriteRecipesAdapter : RecyclerView.Adapter<FavoriteRecipesAdapter.MyVie
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val selectedRecipe = favoriteRecipes[position]
         holder.bind(selectedRecipe)
+
+        /**
+         * Single Click Listener
+         */
+        holder.binding.favoritesRecipesRowLayout.setOnClickListener {
+            val action =
+                FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailActivity(
+                    selectedRecipe.result
+                )
+            holder.itemView.findNavController().navigate(action)
+        }
+
     }
 
     fun setData(newFavoriteRecipes: List<FavoritesEntity>) {

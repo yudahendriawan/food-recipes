@@ -11,6 +11,7 @@ import com.yudahendriawan.foodrecipes.databinding.FragmentInstructionBinding
 import com.yudahendriawan.foodrecipes.databinding.FragmentOverviewBinding
 import com.yudahendriawan.foodrecipes.models.Result
 import com.yudahendriawan.foodrecipes.util.Constants
+import com.yudahendriawan.foodrecipes.util.retrieveParcelable
 
 class InstructionFragment : Fragment() {
 
@@ -25,7 +26,7 @@ class InstructionFragment : Fragment() {
         _binding = FragmentInstructionBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPES_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(Constants.RECIPES_RESULT_KEY)
 
         binding.instructionWebView.webViewClient = object : WebViewClient() {}
         val websiteUrl: String = myBundle!!.sourceUrl

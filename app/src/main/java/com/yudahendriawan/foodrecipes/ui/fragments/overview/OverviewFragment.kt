@@ -11,6 +11,7 @@ import com.yudahendriawan.foodrecipes.R
 import com.yudahendriawan.foodrecipes.databinding.FragmentOverviewBinding
 import com.yudahendriawan.foodrecipes.models.Result
 import com.yudahendriawan.foodrecipes.util.Constants.Companion.RECIPES_RESULT_KEY
+import com.yudahendriawan.foodrecipes.util.retrieveParcelable
 import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
@@ -26,7 +27,7 @@ class OverviewFragment : Fragment() {
         _binding = FragmentOverviewBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(RECIPES_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(RECIPES_RESULT_KEY)
 
         setupLayout(myBundle)
 

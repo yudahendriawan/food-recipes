@@ -11,7 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recipes_row_layout"
+        android:id="@+id/favorites_recipes_row_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -43,6 +43,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:ellipsize="end"
+                    android:fontFamily="@font/courgette"
                     android:maxLines="2"
                     android:text="@{favoritesEntity.result.title}"
                     android:textColor="@color/darker"

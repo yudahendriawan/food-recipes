@@ -13,6 +13,7 @@ import com.yudahendriawan.foodrecipes.databinding.FragmentIngredientBinding
 import com.yudahendriawan.foodrecipes.databinding.FragmentInstructionBinding
 import com.yudahendriawan.foodrecipes.models.Result
 import com.yudahendriawan.foodrecipes.util.Constants
+import com.yudahendriawan.foodrecipes.util.retrieveParcelable
 
 class IngredientFragment : Fragment() {
 
@@ -31,7 +32,7 @@ class IngredientFragment : Fragment() {
         _binding = FragmentIngredientBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPES_RESULT_KEY)
+        val myBundle: Result? = args?.retrieveParcelable(Constants.RECIPES_RESULT_KEY)
 
         setupRecyclerView()
         myBundle?.extendedIngredient?.let {
