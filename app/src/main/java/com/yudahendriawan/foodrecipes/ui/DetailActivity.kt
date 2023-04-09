@@ -32,6 +32,8 @@ class DetailActivity : AppCompatActivity() {
     private var recipeSaved = false
     private var savedRecipeId = 0
 
+    private lateinit var menuItem: MenuItem
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,27 +77,9 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        val menuItem = menu?.findItem(R.id.save_to_favorites_menu)
-        checkSavedRecipes(menuItem!!)
+        menuItem = menu!!.findItem(R.id.save_to_favorites_menu)
+        checkSavedRecipes(menuItem)
         return true
-    }
-
-    private fun checkSavedRecipes(item: MenuItem) {
-        mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
-            try {
-                for (savedRecipe in favoritesEntity) {
-                    if (savedRecipe.result.recipeId == args.result.recipeId) {
-                        changeMenuItemColor(item, R.color.yellow)
-                        savedRecipeId = savedRecipe.id
-                        recipeSaved = true
-                    } else {
-                        changeMenuItemColor(item, R.color.white)
-                    }
-                }
-            } catch (e: Exception) {
-                Log.d("DetailActivity", e.message.toString())
-            }
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -107,6 +91,22 @@ class DetailActivity : AppCompatActivity() {
             removeFromFavorites(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun checkSavedRecipes(item: MenuItem) {
+        mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
+            try {
+                for (savedRecipe in favoritesEntity) {
+                    if (savedRecipe.result.recipeId == args.result.recipeId) {
+                        changeMenuItemColor(item, R.color.yellow)
+                        savedRecipeId = savedRecipe.id
+                        recipeSaved = true
+                    }
+                }
+            } catch (e: Exception) {
+                Log.d("DetailActivity", e.message.toString())
+            }
+        }
     }
 
     private fun saveToFavorites(item: MenuItem) {
@@ -140,5 +140,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon?.setTint(ContextCompat.getColor(this, color))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        changeMenuItemColor(menuItem, R.color.white)
     }
 }

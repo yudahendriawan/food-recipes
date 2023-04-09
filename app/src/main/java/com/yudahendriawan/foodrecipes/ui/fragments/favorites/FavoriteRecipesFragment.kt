@@ -29,11 +29,11 @@ class FavoriteRecipesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
+        binding.mAdapter = mAdapter
 
         setupRecyclerView(binding.favoriteRecipesRecyclerView)
-        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner) {
-            mAdapter.setData(it)
-        }
 
         return binding.root
     }
@@ -41,6 +41,11 @@ class FavoriteRecipesFragment : Fragment() {
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
