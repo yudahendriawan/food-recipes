@@ -125,7 +125,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/clock_image_view" />
 
                 <ImageView
-                    android:id="@+id/leaf_image_view"
+                    android:id="@+id/favorites_leaf_image_view"
                     applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     android:text="Vegan"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@+id/clock_text_view"
-                    app:layout_constraintTop_toBottomOf="@+id/leaf_image_view" />
+                    app:layout_constraintTop_toBottomOf="@+id/favorites_leaf_image_view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
