@@ -174,4 +174,11 @@ class FavoriteRecipesAdapter(
     private fun showSnackBar(message: String) {
         Snackbar.make(rootView, message, Snackbar.LENGTH_SHORT).setAction("OK") {}.show()
     }
+
+    fun clearContextualActionMode() {
+        if (this::mActionMode.isInitialized) {
+            mActionMode.finish()
+        }
+    }
+
 }
