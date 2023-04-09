@@ -146,4 +146,5 @@ class DetailActivity : AppCompatActivity() {
         super.onDestroy()
         changeMenuItemColor(menuItem, R.color.white)
     }
+
 }
