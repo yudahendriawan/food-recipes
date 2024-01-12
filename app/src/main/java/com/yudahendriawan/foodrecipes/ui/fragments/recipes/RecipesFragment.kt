@@ -59,7 +59,7 @@ class RecipesFragment : Fragment() {
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
