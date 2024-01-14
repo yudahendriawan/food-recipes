@@ -28,6 +28,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
+    private var dataRequested = false
+
     private val args by navArgs<RecipesFragmentArgs>()
 
     private var _binding: FragmentRecipesBinding? = null
@@ -57,7 +59,7 @@ class RecipesFragment : Fragment() {
 
         val menuHost: MenuHost = requireActivity()
 
-        menuHost.addMenuProvider(object: MenuProvider {
+        menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.recipes_menu, menu)
 
@@ -144,12 +146,16 @@ class RecipesFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { db ->
-                if (db.isNotEmpty() && !args.backFromBottomSheet) {
+                if (db.isNotEmpty() && !args.backFromBottomSheet || db.isNotEmpty() && dataRequested) {
                     Log.d(RecipesFragment::class.java.simpleName, "readDatabase called! ")
                     mAdapter.setData(db[0].foodRecipe)
                     hideShimmerEffect()
                 } else {
-                    requestApiData()
+                    if (!dataRequested) {
+                        requestApiData()
+                        dataRequested = true
+                    }
+
                 }
             }
         }
