@@ -82,8 +82,8 @@ class RecipesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.apply {
-            recyclerView.adapter = mAdapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerview.adapter = mAdapter
+            recyclerview.layoutManager = LinearLayoutManager(requireContext())
             showShimmerEffect()
         }
     }
@@ -191,11 +191,13 @@ class RecipesFragment : Fragment() {
 
 
     private fun showShimmerEffect() {
-        binding.recyclerView.showShimmer()
+        binding.shimmerFrameLayout.startShimmer()
+        binding.recyclerview.visibility = View.GONE
     }
 
     private fun hideShimmerEffect() {
-        binding.recyclerView.hideShimmer()
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.recyclerview.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {
