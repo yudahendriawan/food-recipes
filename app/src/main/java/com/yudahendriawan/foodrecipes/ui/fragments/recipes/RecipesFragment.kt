@@ -134,6 +134,7 @@ class RecipesFragment : Fragment() {
                     response.data?.let {
                         mAdapter.setData(it)
                     }
+                    recipesViewModel.saveMealAndDietType()
                 }
 
                 is NetworkResult.Error -> {
@@ -163,6 +164,7 @@ class RecipesFragment : Fragment() {
                     val foodRecipe = response.data
                     foodRecipe?.let { mAdapter.setData(it) }
                 }
+
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
                     loadDataFromCache()
@@ -172,6 +174,7 @@ class RecipesFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
@@ -191,12 +194,14 @@ class RecipesFragment : Fragment() {
 
 
     private fun showShimmerEffect() {
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
         binding.shimmerFrameLayout.startShimmer()
         binding.recyclerview.visibility = View.GONE
     }
 
     private fun hideShimmerEffect() {
         binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.GONE
         binding.recyclerview.visibility = View.VISIBLE
     }
 
