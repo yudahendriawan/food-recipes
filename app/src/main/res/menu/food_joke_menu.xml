@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/share_food_joke_menu"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/ic_share_white"
         android:iconTint="@color/white"
         android:title="@string/share"
         app:showAsAction="ifRoom"
