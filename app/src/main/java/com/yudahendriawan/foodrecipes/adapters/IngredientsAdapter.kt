@@ -33,7 +33,7 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
                 ingredientsAmount.text = extendedIngredient.amount.toString()
                 ingredientsUnit.text = extendedIngredient.unit
                 ingredientsConsistency.text = extendedIngredient.consistency
-                ingredientsConsistency.text = extendedIngredient.original
+                ingredientsOriginal.text = extendedIngredient.original
             }
         }
 

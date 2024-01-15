@@ -107,6 +107,5 @@ dependencies {
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
-    implementation 'com.todkars:shimmer-recyclerview:0.4.0'
 
 }

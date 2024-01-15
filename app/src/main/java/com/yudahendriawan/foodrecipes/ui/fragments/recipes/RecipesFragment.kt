@@ -6,6 +6,9 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,6 +27,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
+
+    private var dataRequested = false
 
     private val args by navArgs<RecipesFragmentArgs>()
 
@@ -52,14 +57,42 @@ class RecipesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
 
-        setHasOptionsMenu(true)
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipes_menu, menu)
+
+                val search = menu.findItem(R.id.menu_search)
+                val searchView = search.actionView as? SearchView
+                searchView?.isSubmitButtonEnabled = true
+                searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        if (query != null) {
+                            searchApiData(query)
+                        }
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return true
+                    }
+
+                })
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         setupRecyclerView()
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
@@ -82,8 +115,8 @@ class RecipesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.apply {
-            recyclerView.adapter = mAdapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerview.adapter = mAdapter
+            recyclerview.layoutManager = LinearLayoutManager(requireContext())
             showShimmerEffect()
         }
     }
@@ -113,12 +146,16 @@ class RecipesFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { db ->
-                if (db.isNotEmpty() && !args.backFromBottomSheet) {
+                if (db.isNotEmpty() && !args.backFromBottomSheet || db.isNotEmpty() && dataRequested) {
                     Log.d(RecipesFragment::class.java.simpleName, "readDatabase called! ")
                     mAdapter.setData(db[0].foodRecipe)
                     hideShimmerEffect()
                 } else {
-                    requestApiData()
+                    if (!dataRequested) {
+                        requestApiData()
+                        dataRequested = true
+                    }
+
                 }
             }
         }
@@ -134,6 +171,7 @@ class RecipesFragment : Fragment() {
                     response.data?.let {
                         mAdapter.setData(it)
                     }
+                    recipesViewModel.saveMealAndDietType()
                 }
 
                 is NetworkResult.Error -> {
@@ -163,6 +201,7 @@ class RecipesFragment : Fragment() {
                     val foodRecipe = response.data
                     foodRecipe?.let { mAdapter.setData(it) }
                 }
+
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
                     loadDataFromCache()
@@ -172,6 +211,7 @@ class RecipesFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
@@ -191,11 +231,15 @@ class RecipesFragment : Fragment() {
 
 
     private fun showShimmerEffect() {
-        binding.recyclerView.showShimmer()
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
+        binding.shimmerFrameLayout.startShimmer()
+        binding.recyclerview.visibility = View.GONE
     }
 
     private fun hideShimmerEffect() {
-        binding.recyclerView.hideShimmer()
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.GONE
+        binding.recyclerview.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {
