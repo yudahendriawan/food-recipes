@@ -18,7 +18,7 @@
         <activity
             android:name=".ui.DetailActivity"
             android:label="Detail"
-            android:theme="@style/DetailActivityStyle"
+            android:theme="@style/DetailsActivityStyle"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightGray"
+        android:background="@color/backgroundColor"
         tools:context=".ui.fragments.favorites.FavoriteRecipesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -43,6 +43,7 @@
             android:alpha="0.5"
             android:src="@drawable/ic_menu_book"
             android:visibility="invisible"
+            app:tint="@color/titleColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -60,6 +61,7 @@
             android:text="@string/no_favorites_recipes"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/titleColor"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/no_data_image_view"
             app:layout_constraintStart_toStartOf="@+id/no_data_image_view"
