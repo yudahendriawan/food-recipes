@@ -15,8 +15,8 @@
         onRecipeClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp">
 
@@ -69,12 +69,12 @@
 
                 <TextView
                     android:id="@+id/description_textView"
+                    parseHtml="@{result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{result.summary}"
                     android:textColor="@color/descriptionColor"
                     app:layout_constraintEnd_toEndOf="@+id/title_textView"
                     app:layout_constraintStart_toStartOf="@+id/title_textView"
@@ -133,7 +133,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leaf_text_view"
                     app:layout_constraintTop_toTopOf="@+id/clock_image_view"
-                    app:srcCompat="@drawable/ic_leaf" />
+                    app:srcCompat="@drawable/ic_leaf"
+                    app:tint="@color/itemColor" />
 
                 <TextView
                     android:id="@+id/leaf_text_view"
@@ -143,6 +144,7 @@
                     android:layout_marginStart="24dp"
                     android:text="Vegan"
                     android:textAlignment="center"
+                    android:textColor="@color/titleColor"
                     app:layout_constraintStart_toEndOf="@+id/clock_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/favorites_leaf_image_view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
