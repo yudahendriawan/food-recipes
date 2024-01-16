@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.yudahendriawan.foodrecipes.data.DataStoreRepository
 import com.yudahendriawan.foodrecipes.data.MealAndDietType
-import com.yudahendriawan.foodrecipes.util.Constants
 import com.yudahendriawan.foodrecipes.util.Constants.Companion.API_KEY
 import com.yudahendriawan.foodrecipes.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.yudahendriawan.foodrecipes.util.Constants.Companion.DEFAULT_MEAL_TYPE
@@ -39,13 +38,17 @@ class RecipesViewModel @Inject constructor(
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
     val readBackOnline = dataStoreRepository.readBackOnline.asLiveData()
 
-    fun saveMealAndDietType() = viewModelScope.launch(Dispatchers.IO) {
-        dataStoreRepository.saveMealAndDietType(
-            mealAndDiet.selectedMealType,
-            mealAndDiet.selectedMealTypeId,
-            mealAndDiet.selectedDietType,
-            mealAndDiet.selectedDietTypeId)
-    }
+    fun saveMealAndDietType() =
+        viewModelScope.launch(Dispatchers.IO) {
+            if (this@RecipesViewModel::mealAndDiet.isInitialized) {
+                dataStoreRepository.saveMealAndDietType(
+                    mealAndDiet.selectedMealType,
+                    mealAndDiet.selectedMealTypeId,
+                    mealAndDiet.selectedDietType,
+                    mealAndDiet.selectedDietTypeId
+                )
+            }
+        }
 
     fun saveMealAndDietTypeTemp(
         mealType: String,
@@ -67,8 +70,13 @@ class RecipesViewModel @Inject constructor(
 
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[QUERY_API_KEY] = API_KEY
-        queries[QUERY_TYPE] = mealAndDiet.selectedMealType
-        queries[QUERY_DIET] = mealAndDiet.selectedDietType
+        if (this@RecipesViewModel::mealAndDiet.isInitialized) {
+            queries[QUERY_TYPE] = mealAndDiet.selectedMealType
+            queries[QUERY_DIET] = mealAndDiet.selectedDietType
+        } else {
+            queries[QUERY_TYPE] = DEFAULT_MEAL_TYPE
+            queries[QUERY_DIET] = DEFAULT_DIET_TYPE
+        }
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[QUERY_FILL_INGREDIENTS] = "true"
 
