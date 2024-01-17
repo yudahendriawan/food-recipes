@@ -53,6 +53,8 @@ class FoodJokeFragment : Fragment() {
                         this.type = "text/plain"
                     }
                     startActivity(shareIntent)
+                } else if (menuItem.itemId == R.id.refresh_food_jokes) {
+                    mainViewModel.getFoodJoke(API_KEY)
                 }
                 return true
             }

@@ -4,6 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/refresh_food_jokes"
+        android:icon="@drawable/ic_refresh"
+        android:iconTint="@color/white"
+        android:title="Refresh"
+        app:showAsAction="ifRoom"
+        tools:targetApi="o" />
+
+    <item
         android:id="@+id/share_food_joke_menu"
         android:icon="@drawable/ic_share_white"
         android:iconTint="@color/white"
